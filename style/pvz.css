@@ -1,0 +1,142 @@
+/* The original stylesheet owns board positions and movement animations. */
+:root {
+  color-scheme: light;
+  --ink: #3b4021;
+  --muted: #6c704a;
+  --wood: #75502e;
+  --cream: #fff6d8;
+}
+
+html { min-height: 100%; background: #639140; }
+body {
+  box-sizing: border-box;
+  min-height: 100vh;
+  margin: 0;
+  padding: 30px 24px;
+  color: var(--ink);
+  background: linear-gradient(#1b3e2220, #203b3055), url(../assets/pvz/garden.jpg) center / cover fixed;
+  font-family: "Clear Sans", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  padding: 22px 26px 20px;
+  border: 5px solid var(--wood);
+  border-radius: 20px;
+  background: #fff8dfee;
+  box-shadow: 0 10px 0 #46341c66, 0 20px 70px #17290d66, inset 0 0 0 3px #e4cd91;
+}
+.edition { display: flex; align-items: center; gap: 7px; padding-bottom: 12px; margin-bottom: 16px; border-bottom: 2px dashed #b9bd86; color: #496b2d; font-size: 11px; font-weight: 700; letter-spacing: 2px; }
+.edition-mark { width: 9px; height: 9px; background: #7caa3c; border-radius: 50%; box-shadow: 0 0 0 3px #7caa3c22; }
+.edition-number { margin-left: auto; color: var(--muted); font-size: 10px; letter-spacing: 0.5px; }
+.heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.heading::after, .above-game::after { display: none; }
+h1.title { float: none; margin: 0; font-size: 87px; font-weight: 900; line-height: 0.95; letter-spacing: -5px; color: #e8f1b2; -webkit-text-stroke: 2px #385522; text-shadow: 0 5px 0 #385522, 3px 7px 0 #78563155; }
+.title-plants { display: block; margin-bottom: 9px; color: #4d7e30; font-size: 19px; letter-spacing: 4px; line-height: 1; -webkit-text-stroke: 0; text-shadow: none; }
+.scores-container { display: flex; gap: 8px; float: none; }
+.score-container, .best-container { box-sizing: border-box; min-width: 86px; height: 72px; padding: 27px 12px 8px; margin: 0; border: 3px solid #796040; border-radius: 10px; background: linear-gradient(#ffffdf, #ebd395); color: #53411f; font-size: 25px; line-height: 30px; box-shadow: 0 3px 0 #79604033; }
+.score-container::after, .best-container::after { top: 9px; color: #6c6939; font-size: 10px; line-height: 15px; }
+.score-container::after { content: "SUN SCORE"; }
+.best-container::after { content: "BEST"; }
+.score-container .score-addition { color: #3b7a2c; }
+.tagline { margin: 15px 0 16px; color: var(--muted); font-size: 13px; letter-spacing: 1px; }
+
+.seed-bank { display: flex; gap: 8px; margin-bottom: 18px; padding: 9px 12px; border: 3px solid #6e4f2c; border-radius: 10px; background: repeating-linear-gradient(0deg, #956d3c 0, #956d3c 18px, #8b6336 19px, #956d3c 21px); box-shadow: inset 0 2px 6px #3f2e1d55; }
+.seed-packet { flex: 1; min-width: 0; text-align: center; border: 2px solid #796440; border-radius: 4px; background: linear-gradient(#fdf5d1 70%, #c3cd86 70%); box-shadow: 0 2px 0 #49341d55; transform: rotate(-2deg); }
+.seed-packet:nth-child(even) { transform: rotate(2deg); }
+.seed-packet img { display: block; width: 49px; height: 48px; margin: 1px auto; object-fit: contain; }
+.seed-packet span { display: block; color: #455328; font-size: 12px; font-weight: 700; line-height: 21px; }
+.above-game { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.game-intro { float: none; width: auto; line-height: 1.7; color: var(--muted); font-size: 13px; }
+.game-intro strong { color: #426c24; }
+button { border: 0; font: inherit; cursor: pointer; }
+.restart-button, .game-container .game-message button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; height: 42px; padding: 0 19px; border: 2px solid #365523; border-radius: 8px; background: linear-gradient(#83ac45, #618e35); color: #fff9dc; font-size: 13px; font-weight: 700; line-height: normal; text-shadow: 0 1px #385024; box-shadow: 0 3px 0 #365523; }
+.restart-button { float: none; flex-shrink: 0; }
+.restart-button:hover, .game-container .game-message button:hover { background: linear-gradient(#9cbe5d, #739f42); }
+button:focus-visible, a:focus-visible { outline: 3px solid #d18b16; outline-offset: 4px; }
+
+.game-container { margin-top: 18px; border-radius: 12px; background: #6b4e2f; box-shadow: 0 5px 0 #49341f, inset 0 0 0 5px #9e7844, 0 8px 15px #49341f26; }
+.grid-cell { border-radius: 5px; background: #739d3f; box-shadow: inset 0 2px 6px #344e1633; }
+.grid-row:nth-child(even) .grid-cell:nth-child(odd), .grid-row:nth-child(odd) .grid-cell:nth-child(even) { background: #82ac4b; }
+.tile[class*="tile-"] .tile-inner {
+  position: relative;
+  box-sizing: border-box;
+  border: 2px solid #65833a;
+  border-radius: 7px;
+  background-color: #e7edbb;
+  background-repeat: no-repeat;
+  background-position: center 6px;
+  background-size: 76px 76px;
+  box-shadow: inset 0 0 0 2px #ffffff66, 0 2px 3px #3b451c33;
+}
+.tile-value { position: absolute; right: 3px; bottom: 3px; min-width: 23px; padding: 1px 5px; border: 1px solid #9b792d; border-radius: 5px; background: #fff4c9; color: #4f4320; font-size: 17px; font-weight: 800; line-height: 23px; text-align: center; box-shadow: 0 1px 2px #3b451c22; }
+.tile.tile-2 .tile-inner { background-color: #f5e9b3; background-image: url(../assets/pvz/sunflower.gif); box-shadow: inset 0 0 0 2px #ffffff66; }
+.tile.tile-4 .tile-inner { background-color: #d7e8aa; background-image: url(../assets/pvz/peashooter.gif); box-shadow: inset 0 0 0 2px #ffffff66; }
+.tile.tile-8 .tile-inner { background-color: #e7d2a1; background-image: url(../assets/pvz/wallnut.gif); }
+.tile.tile-16 .tile-inner { background-color: #e4d4ba; background-image: url(../assets/pvz/potatomine.gif); }
+.tile.tile-32 .tile-inner { background-color: #c6e7ec; background-image: url(../assets/pvz/snowpea.gif); }
+.tile.tile-64 .tile-inner { background-color: #f2c7b1; background-image: url(../assets/pvz/cherrybomb.gif); }
+.tile.tile-128 .tile-inner { background-color: #f3d778; background-image: url(../assets/pvz/sunflower.gif); }
+.tile.tile-256 .tile-inner { background-color: #abcc79; background-image: url(../assets/pvz/peashooter.gif); }
+.tile.tile-512 .tile-inner { background-color: #9cd5df; background-image: url(../assets/pvz/snowpea.gif); }
+.tile.tile-1024 .tile-inner { background-color: #edaa8e; background-image: url(../assets/pvz/cherrybomb.gif); }
+.tile.tile-2048 .tile-inner { background-color: #f7d65f; background-image: url(../assets/pvz/sun.gif); box-shadow: 0 0 25px #fff16b99, inset 0 0 0 3px #ffe995; }
+.tile.tile-super .tile-inner { background-color: #eed8a3; background-image: url(../assets/pvz/sun.gif); }
+.tile.tile-128 .tile-value, .tile.tile-256 .tile-value, .tile.tile-512 .tile-value, .tile.tile-1024 .tile-value { background: #ffe092; }
+.game-container .game-message { border-radius: 12px; background: #fff5d4e8; color: #4e532c; backdrop-filter: blur(3px); }
+.game-container .game-message.game-won { background: #e9f1bde8; color: #49772d; }
+.game-container .game-message p { font-size: 42px; }
+.game-container .game-message button { margin: 0 4px; }
+.game-container .game-message .keep-playing-button { display: none; }
+.game-container .game-message.game-won .keep-playing-button { display: inline-flex; }
+
+.play-guide { margin-top: 25px; padding: 14px 16px; border: 1px solid #b9bb87; border-radius: 9px; background: #e8eac855; }
+.guide-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #526e34; }
+.keycaps { display: flex; gap: 4px; }
+kbd { width: 23px; height: 23px; border: 1px solid #a1a774; border-radius: 5px; background: #fff7d4; color: #6b7441; text-align: center; font-family: inherit; font-size: 13px; line-height: 23px; box-shadow: 0 2px 0 #a1a77444; }
+.game-explanation { margin: 11px 0 0; color: var(--muted); font-size: 12px; line-height: 1.9; }
+.game-explanation strong { color: #496c2d; }
+.credits { padding-top: 17px; text-align: center; color: #77724b; font-size: 10px; line-height: 1.8; }
+.credits > span { color: #5b6f38; font-size: 12px; }
+.credits p { margin: 7px 0 0; }
+a { color: inherit; text-underline-offset: 3px; font-weight: 400; }
+a:hover { color: #3d7528; }
+.garden-guest { position: fixed; z-index: 0; bottom: 40px; pointer-events: none; filter: drop-shadow(0 8px 4px #1b2e1166); }
+.guest-sunflower { left: max(20px, calc(50% - 510px)); width: 150px; }
+.guest-zombie { right: max(10px, calc(50% - 550px)); width: 220px; }
+
+@media screen and (max-width: 900px) { .garden-guest { display: none; } }
+@media screen and (max-width: 620px) and (min-width: 521px) { body { padding: 20px 8px; } .container { padding: 18px 10px; } }
+@media screen and (max-width: 520px) {
+  body { padding: 16px 7px; background-position: 48% center; }
+  .container { padding: 14px 10px; border-width: 3px; border-radius: 13px; }
+  .edition { gap: 6px; margin-bottom: 15px; padding-bottom: 10px; font-size: 8px; letter-spacing: 0.5px; }
+  .edition-number { font-size: 8px; letter-spacing: 0; }
+  .heading { gap: 8px; margin: 0; }
+  h1.title { font-size: 57px; letter-spacing: -3px; -webkit-text-stroke-width: 1px; text-shadow: 0 3px 0 #385522; }
+  .title-plants { font-size: 12px; letter-spacing: 2px; margin-bottom: 7px; }
+  .scores-container { gap: 5px; }
+  .score-container, .best-container { min-width: 59px; height: 59px; padding: 23px 6px 4px; border-width: 2px; font-size: 20px; line-height: 26px; }
+  .score-container::after, .best-container::after { top: 7px; font-size: 8px; }
+  .tagline { margin: 12px 0; font-size: 10px; letter-spacing: 0.5px; }
+  .seed-bank { gap: 4px; padding: 6px; border-width: 2px; margin-bottom: 13px; }
+  .seed-packet { border-width: 1px; }
+  .seed-packet img { width: 32px; height: 33px; }
+  .seed-packet span { font-size: 9px; line-height: 16px; }
+  .game-intro { font-size: 10px; width: auto; }
+  .restart-button { width: auto; margin: 0; height: 35px; padding: 0 10px; gap: 7px; font-size: 11px; }
+  .game-container { margin-top: 15px; }
+  .tile[class*="tile-"] .tile-inner { background-size: 42px 42px; background-position: center 1px; border-width: 1px; border-radius: 5px; }
+  .tile-value { right: 1px; bottom: 1px; min-width: 15px; padding: 0 3px; border-radius: 3px; font-size: 11px; line-height: 15px; }
+  .play-guide { margin-top: 19px; padding: 11px; }
+  .guide-heading { font-size: 9px; letter-spacing: 0.5px; }
+  .keycaps { gap: 3px; }
+  kbd { width: 19px; height: 20px; line-height: 20px; font-size: 11px; }
+  .game-explanation { font-size: 10px; }
+  .credits { font-size: 8px; }
+  .credits > span { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile, .tile .tile-inner, .score-addition, .game-container .game-message { animation: none !important; transition: none !important; }
+}
