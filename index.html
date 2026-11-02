@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>2048</title>
+  <title>Plants vs. 2048 · Garden Merge</title>
+  <meta name="description" content="Play 2048 on a Plants vs. Zombies lawn. Slide plants, merge matching numbers, and grow your way to 2048!">
+  <meta name="theme-color" content="#527b2f">
 
   <link href="style/main.css" rel="stylesheet" type="text/css">
+  <link href="style/pvz.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
   <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
@@ -14,33 +17,45 @@
 
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <div class="container">
+  <img class="garden-guest guest-sunflower" src="assets/pvz/sunflower.gif" alt="" aria-hidden="true">
+  <img class="garden-guest guest-zombie" src="assets/pvz/zombie.gif" alt="" aria-hidden="true">
+  <main class="container">
+    <div class="edition"><span class="edition-mark" aria-hidden="true"></span> THE FRONT LAWN <span class="edition-number">SUNNY DAY · GARDEN MERGE</span></div>
     <div class="heading">
-      <h1 class="title">2048</h1>
+      <h1 class="title"><span class="title-plants">PLANTS vs.</span>2048</h1>
       <div class="scores-container">
         <div class="score-container">0</div>
         <div class="best-container">0</div>
       </div>
     </div>
 
+    <p class="tagline">Start with a little 2. Grow something great.</p>
+    <div class="seed-bank" aria-label="Plant and number guide">
+      <div class="seed-packet"><img src="assets/pvz/sunflower.gif" alt="Sunflower"><span>2</span></div>
+      <div class="seed-packet"><img src="assets/pvz/peashooter.gif" alt="Peashooter"><span>4</span></div>
+      <div class="seed-packet"><img src="assets/pvz/wallnut.gif" alt="Wall-nut"><span>8</span></div>
+      <div class="seed-packet"><img src="assets/pvz/potatomine.gif" alt="Potato Mine"><span>16</span></div>
+      <div class="seed-packet"><img src="assets/pvz/snowpea.gif" alt="Snow Pea"><span>32</span></div>
+      <div class="seed-packet"><img src="assets/pvz/cherrybomb.gif" alt="Cherry Bomb"><span>64+</span></div>
+    </div>
     <div class="above-game">
-      <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-      <a class="restart-button">New Game</a>
+      <p class="game-intro">Match plants. Grow to <strong>2048!</strong></p>
+      <button class="restart-button" type="button">New garden <span aria-hidden="true">↻</span></button>
     </div>
 
-    <div class="game-container">
+    <div class="game-container" role="region" aria-label="2048 plant merge game board">
       <div class="game-message">
         <p></p>
         <div class="lower">
-	        <a class="keep-playing-button">Keep going</a>
-          <a class="retry-button">Try again</a>
+          <button class="keep-playing-button" type="button">Keep growing</button>
+          <button class="retry-button" type="button">Try again</button>
         </div>
       </div>
 
-      <div class="grid-container">
+      <div class="grid-container" aria-hidden="true">
         <div class="grid-row">
           <div class="grid-cell"></div>
           <div class="grid-cell"></div>
@@ -72,18 +87,15 @@
       </div>
     </div>
 
-    <p class="game-explanation">
-      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
-    </p>
-    <hr>
-    <p>
-    <strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
-    </p>
-    <hr>
-    <p>
-    Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
-    </p>
-  </div>
+    <div class="play-guide">
+      <div class="guide-heading"><span>GARDEN SURVIVAL GUIDE</span><span class="keycaps" aria-hidden="true"><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd></span></div>
+      <p class="game-explanation">Use your <strong>arrow keys</strong> or <strong>swipe</strong> to move the plants. Matching numbers merge and add to your score. Leave room to grow, and work your way to <strong>2048!</strong></p>
+    </div>
+    <footer class="credits">
+      <span>A little sunshine. A little strategy.</span>
+      <p>Original 2048 by <a href="https://gabrielecirulli.com/">Gabriele Cirulli</a> · Remixed by <a href="https://github.com/sihengxia126/2048">Siheng Xia</a><br>Plants vs. Zombies artwork © PopCap / EA · Unofficial classroom project<br><a href="https://github.com/milohaha/PVZ-project-at-NKU">Plant assets</a> · <a href="https://github.com/CaoRenYu/Plants-vs-Zombies">Zombie assets</a> · <a href="https://github.com/priyanshu-t-singh/pvz2-canvas-game">Lawn assets</a></p>
+    </footer>
+  </main>
 
   <script src="js/bind_polyfill.js"></script>
   <script src="js/classlist_polyfill.js"></script>
